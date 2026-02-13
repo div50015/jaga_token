@@ -3,7 +3,7 @@ from selene import browser, have, be, command, query
 import os
 from selene import command
 
-def test_complete_todo():
+def test_jaga_login():
     browser.open('')
     # уменьшение размера изображения в 0.8 раза
     # browser.execute_script('document.querySelector(".body-height").style.transform = "scale(.8)"')
@@ -17,8 +17,9 @@ def test_complete_todo():
     browser.element('#password').type('Bc:$hsn8KY')
     # time.sleep(1)
     browser.element('#kc-login').click()
-    time.sleep(1)
+    time.sleep(10)
     print(browser.driver.get_cookies())
+    print(browser.driver.get_cookie('accessToken'))
     time.sleep(10)
     # browser.element('#userNumber').type('79287777777')
     # browser.element('#dateOfBirthInput').click()
