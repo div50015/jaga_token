@@ -1,5 +1,5 @@
 import time
-from selene import browser, have
+from selene import browser, have, be, command, query
 import os
 from selene import command
 
@@ -11,12 +11,14 @@ def test_complete_todo():
     # browser.all('[id^google_ads][id$=container__]').with_(timeout=10).wait_until(have.size_less_than_or_equal(3))
     # browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
-    # time.sleep(10)
+    # time.sleep(1)
     browser.element('#email').type('igor.degtyarenko@south.rt.ru')
-    # time.sleep(10)
+    # time.sleep(1)
     browser.element('#password').type('Bc:$hsn8KY')
-    # time.sleep(10)
+    # time.sleep(1)
     browser.element('#kc-login').click()
+    time.sleep(1)
+    print(browser.driver.get_cookies())
     time.sleep(10)
     # browser.element('#userNumber').type('79287777777')
     # browser.element('#dateOfBirthInput').click()
