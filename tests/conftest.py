@@ -14,7 +14,7 @@ def browser_management():
     # закрытие сообщения о том что браузер запущен в отладочном режиме
     driver_options = webdriver.ChromeOptions()
     driver_options.add_experimental_option("excludeSwitches", ['enable-automation'])
-#    driver_options.add_argument('--headless=new')
+    driver_options.add_argument('--headless=new')
     browser.config.driver_options = driver_options
 
     yield

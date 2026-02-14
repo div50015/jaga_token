@@ -20,20 +20,53 @@ def test_jaga_login():
     browser.element('#email').type('igor.degtyarenko@south.rt.ru')
     browser.element('#password').type('Bc:$hsn8KY')
     browser.element('#kc-login').click()
-    time.sleep(5)
+    time.sleep(1)
     # print(browser.driver.get_cookies())
     # print(browser.driver.get_cookie('accessToken'))
-    jsession = browser.driver.get_cookie('JSESSIONID')
-    print('  ')
-    print('JSESSION=',jsession['value'])
+
+
     token = browser.driver.execute_script("return window.localStorage.getItem('jaga.accessToken');")
-    print('token',token)
+    print('token=',token)
+    # time.sleep(1)
+
+    # jsession = browser.driver.get_cookie('JSESSIONID')
+    # print('  ')
+    # print('JSESSION=',jsession['value'])
+
+
+    browser.open('https://test2-jaga.lukit.ru/esmp-integrator/swagger-ui/index.html')
     time.sleep(1)
 
-    headers = {'Authorization' : f'{jsession}', 'Cookie' : f'Bearer {token}'}
+    jsession = browser.driver.get_cookie('JSESSIONID')['value']
+    print('  ')
+    print('JSESSION=',jsession)
+
+
+    headers = {
+        'accept': '*/*',
+        'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Authorization': f'Bearer {token}',
+        'cache-control': 'no-cache',
+        'Cookie' : f'{jsession}',
+        'pragma': 'no-cache',
+        'priority': 'u=1, i',
+        'referer': 'https://test2-jaga.lukit.ru/esmp-integrator/swagger-ui/index.html',
+        'sec-ch-ua': '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': 'Windows',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin'
+    }
     response = requests.get('https://test2-jaga.lukit.ru/esmp-integrator/jaga/project/serviceList', headers=headers)
     print('  ')
     print('response=',response)
+
+
+
+
+
+
 
 
     # browser.element('#userNumber').type('79287777777')
