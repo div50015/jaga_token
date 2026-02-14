@@ -2,6 +2,8 @@ import time
 from selene import browser, have, be, command, query
 import os
 from selene import command
+import json
+
 
 def test_jaga_login():
     browser.open('')
@@ -18,9 +20,12 @@ def test_jaga_login():
     # time.sleep(1)
     browser.element('#kc-login').click()
     time.sleep(10)
-    print(browser.driver.get_cookies())
-    print(browser.driver.get_cookie('accessToken'))
-    time.sleep(10)
+    # print(browser.driver.get_cookies())
+    # print(browser.driver.get_cookie('accessToken'))
+    cookies = browser.driver.get_cookies()
+    with open('cookies.json', 'w') as file:
+        json.dump(cookies, file)
+    time.sleep(1)
     # browser.element('#userNumber').type('79287777777')
     # browser.element('#dateOfBirthInput').click()
     # browser.element('.react-datepicker__year-select').type('1999')
