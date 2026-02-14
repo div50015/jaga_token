@@ -3,7 +3,7 @@ from selene import browser, have, be, command, query
 import os
 from selene import command
 import json
-
+import requests
 
 def test_jaga_login():
     browser.open('')
@@ -13,19 +13,29 @@ def test_jaga_login():
     # browser.all('[id^google_ads][id$=container__]').with_(timeout=10).wait_until(have.size_less_than_or_equal(3))
     # browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
-    # time.sleep(1)
+    time.sleep(1)
+    # cookies = browser.driver.get_cookies()
+    # with open('cookies1.json', 'w') as file:
+    #     json.dump(cookies, file)
     browser.element('#email').type('igor.degtyarenko@south.rt.ru')
-    # time.sleep(1)
     browser.element('#password').type('Bc:$hsn8KY')
-    # time.sleep(1)
     browser.element('#kc-login').click()
-    time.sleep(10)
+    time.sleep(5)
     # print(browser.driver.get_cookies())
     # print(browser.driver.get_cookie('accessToken'))
-    cookies = browser.driver.get_cookies()
-    with open('cookies.json', 'w') as file:
-        json.dump(cookies, file)
+    jsession = browser.driver.get_cookie('JSESSIONID')
+    print('  ')
+    print('JSESSION=',jsession['value'])
+    token = browser.driver.execute_script("return window.localStorage.getItem('jaga.accessToken');")
+    print('token',token)
     time.sleep(1)
+
+    headers = {'Authorization' : f'{jsession}', 'Cookie' : f'Bearer {token}'}
+    response = requests.get('https://test2-jaga.lukit.ru/esmp-integrator/jaga/project/serviceList', headers=headers)
+    print('  ')
+    print('response=',response)
+
+
     # browser.element('#userNumber').type('79287777777')
     # browser.element('#dateOfBirthInput').click()
     # browser.element('.react-datepicker__year-select').type('1999')
