@@ -40,14 +40,14 @@ def test_jaga_login():
     jsession = browser.driver.get_cookie('JSESSIONID')['value']
     print('  ')
     print('JSESSION=',jsession)
-
+    time.sleep(1)
 
     headers = {
         'accept': '*/*',
         'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
         'Authorization': f'Bearer {token}',
         'cache-control': 'no-cache',
-        'Cookie' : f'{jsession}',
+        # 'Cookie' : f'JSESSIONID={jsession}',
         'pragma': 'no-cache',
         'priority': 'u=1, i',
         'referer': 'https://test2-jaga.lukit.ru/esmp-integrator/swagger-ui/index.html',
@@ -58,11 +58,14 @@ def test_jaga_login():
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin'
     }
-    response = requests.get('https://test2-jaga.lukit.ru/esmp-integrator/jaga/project/serviceList', headers=headers)
+    cookies = {'JSESSIONID': f'{jsession}'}
+
+
+    response = requests.get('https://test2-jaga.lukit.ru/esmp-integrator/jaga/project/serviceList', headers=headers, cookies=cookies)
     print('  ')
     print('response=',response)
-
-
+    time.sleep(1)
+    time.sleep(1)
 
 
 
