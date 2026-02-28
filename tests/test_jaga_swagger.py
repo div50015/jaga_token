@@ -1,6 +1,7 @@
 import requests
 from utils import get_token
 
+# Run test in cli : python -m pytest -s .\tests\test_jaga_swagger.py
 
 def test_jaga_login():
 
